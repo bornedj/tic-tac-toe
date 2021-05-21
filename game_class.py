@@ -1,23 +1,17 @@
 #establishing the game class
 class Game():
-    #user board will be displayed to the players so they can see what choices remain
-    user_board = """
-    0|1|2
-    3|4|5
-    6|7|8
-    """
+    
+    #init
+    def __init__(self):     
+        self.user_board = """
+        0|1|2
+        3|4|5
+        6|7|8
+        """
 
-    board = [99] * 9
-    row_options = ['top', 'middle', 'bottom']
-    col_options = ['left, middle', 'right']
-    new_game = False
+        self.board = [99] * 9
 
-    def __repr__(self):
-        return str(self.user_board)
-
-    # def check_winner(self):
-    #     if board[0] + board[1] + board[2] == 0:            
-
+    #turn method updates the keeps track of winning
     def turn(self, player_turn, pick):
         if player_turn == 0:
             self.board[pick] = 0
@@ -33,8 +27,37 @@ class Game():
             return True
         else:
             return False
+
+    #defining the win method
+    def win_check(self):
+        if self.board[0] + self.board[1] + self.board[2] == 0:
+            return 1
+        elif self.board[3] + self.board[4] + self.board[5] == 0:
+            return 1
+        elif self.board[6] + self.board[7] + self.board[8] == 0:
+            return 1
+        elif self.board[0] + self.board[3] + self.board[6] == 0: return 1
+        elif self.board[1] + self.board[4] + self.board[7] == 0: return 1
+        elif self.board[2] + self.board[5] + self.board[8] == 0: return 1
+        elif self.board[0] + self.board[4] + self.board[8] == 0: return 1
+        elif self.board[2] + self.board[4] + self.board[6] == 0: return 1
+        elif self.board[0] + self.board[1] + self.board[2] == 3:
+            return 2
+        elif self.board[3] + self.board[4] + self.board[5] == 3:
+            return 2
+        elif self.board[6] + self.board[7] + self.board[8] == 3:
+            return 2
+        elif self.board[0] + self.board[3] + self.board[6] == 3: return 2
+        elif self.board[1] + self.board[4] + self.board[7] == 3: return 2
+        elif self.board[2] + self.board[5] + self.board[8] == 3: return 2
+        elif self.board[0] + self.board[4] + self.board[8] == 3: return 2
+        elif self.board[2] + self.board[4] + self.board[6] == 3: return 2
+        else: return 0
+
+        
     
-    def display_board(self):
+    #function that displays current board to let users know where they can play
+    def __repr__(self):
         for square in range(len(self.board)):
             if self.board[square] == 0:
                 self.user_board = self.user_board.replace(str(square), 'X')
