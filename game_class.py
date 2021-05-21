@@ -26,7 +26,12 @@ class Game():
             return True
         else:
             return False
-            
+    
+    def display_board(self):
+        for square in range(len(self.board)):
+            if self.board[square] == 0:
+                pass
+
         
 
     
