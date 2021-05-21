@@ -6,7 +6,7 @@ class Player():
         self.name = name
         
     def __repr__(self):
-        return f"Player is {self.name} and has won {self.wins} time(s)."
+        return f"Player is {self.name}."
         
     def update_wins(self):
         self.wins += 1
@@ -14,6 +14,7 @@ class Player():
     def update_name(self, new_name):
         self.name = new_name
 
-    
+    def display_wins(self):
+        return "{} has won {} time(s).".format(self.name, self.wins)
     
         
