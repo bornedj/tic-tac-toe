@@ -1,7 +1,8 @@
 #establishing the game class
 class Game():
     #user board will be displayed to the players so they can see what choices remain
-    user_board = """0|1|2
+    user_board = """
+    0|1|2
     3|4|5
     6|7|8
     """
@@ -12,7 +13,7 @@ class Game():
     new_game = False
 
     def __repr__(self):
-        return str(self.board)
+        return str(self.user_board)
 
     # def check_winner(self):
     #     if board[0] + board[1] + board[2] == 0:            
@@ -36,7 +37,10 @@ class Game():
     def display_board(self):
         for square in range(len(self.board)):
             if self.board[square] == 0:
-                pass
+                self.user_board = self.user_board.replace(str(square), 'X')
+            elif self.board[square] == 1:
+                self.user_board = self.user_board.replace(str(square), 'O')
+        return "\n{}".format(self.user_board)
 
         
 

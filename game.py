@@ -2,10 +2,7 @@
 import random
 from player import Player
 from game_class import Game
-tic_tac_toe_board = """0|1|2
-3|4|5
-6|7|8
-"""
+
 
 #function that will run for every new game
 def main():
@@ -36,6 +33,7 @@ def main():
 def game_turns(game, player_one, player_two, player_turn):
 
     if player_turn == 0: #player ones turn
+        print(game.display_board())
         pick = int(input(f"{player_one.name} choice your square based on the board above (0-8): "))
         if game.board[pick] == 99:#checks if pick is eligible
             game.turn(0, pick)#assign pick
@@ -53,6 +51,7 @@ def game_turns(game, player_one, player_two, player_turn):
         game_turns(game, player_one, player_two, 1)
 
     elif player_turn == 1: #player twos turn
+        print(game.display_board())
         pick = int(input(f"{player_two.name} choice your square based on the board above (0-8): "))
         if game.board[pick] == 99:#checks if eligible
             game.turn(1, pick)
