@@ -1,9 +1,7 @@
 """ Here I will create the classes for a player"""
 
 class Player():
-    won = False
-    turn = False
-    
+    wins = 0    
     def __init__(self, name):
         self.name = name
         

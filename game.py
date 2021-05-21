@@ -2,10 +2,10 @@
 import random
 from player import Player
 from game_class import Game
-tic_tac_toe_board = """_|_|_
-_|_|_
- | |
- """
+tic_tac_toe_board = """0|1|2
+3|4|5
+6|7|8
+"""
 
 #function that will run for every new game
 def main():
@@ -13,7 +13,7 @@ def main():
     game = Game()
 
     #take in inputs to set up the game
-    print(tic_tac_toe_board, "\nWelcome to tic tac toe. Please enter player names and then we will decide who goes first.")
+    print("Welcome to tic tac toe. Please enter player names and then we will decide who goes first.")
     player_one = Player(input("Please enter player one's name: "))
     player_two = Player(input("Please enter player two's name: "))
 
@@ -24,23 +24,53 @@ def main():
 
     differences = [abs(rand_num - player_one.guess), abs(rand_num - player_two.guess)]
     if differences[0] < differences[1]:
-        player_one.turn = True
+        game_turns(game, player_one, player_two, 0)
     elif differences[0] > differences[1]:
-        player_two.turn = True 
+        game_turns(game, player_one, player_two, 1)
+
+    print(game)
+    # print(tic_tac_toe_board)
 
 
+# defining a function that will use recursion until the game completes to alternate turns  
+def game_turns(game, player_one, player_two, player_turn):
 
-    
+    if player_turn == 0: #player ones turn
+        pick = int(input(f"{player_one.name} choice your square based on the board above (0-8): "))
+        if game.board[pick] == 99:#checks if pick is eligible
+            game.turn(0, pick)#assign pick
+        else:
+            print('\nPlease select a square that hasn\'t been selected')
+            game_turns(game, player_one, player_two, 0) #loop through again
+        
+        #tie check
+        if game.tie_check():
+            another = input('The game was a tie. If you would like to play again please type "yes" if not type "q": ').lower()
+            if another == 'yes':
+                main()
+
+        #next players turn after winner/tie check
+        game_turns(game, player_one, player_two, 1)
+
+    elif player_turn == 1: #player twos turn
+        pick = int(input(f"{player_two.name} choice your square based on the board above (0-8): "))
+        if game.board[pick] == 99:#checks if eligible
+            game.turn(1, pick)
+        else:
+            print('\nPlease select a square that hasn\'t been selected')
+            game_turns(game, player_one, player_two, 1) # loops through again
+        
+        #tie check
+        if game.tie_check():
+            another = input('The game was a tie. If you would like to play again please type "yes" if not type "q": ').lower()
+            if another == 'yes':
+                main()
+
+        #next players turn after winner/tie check
+        game_turns(game, player_one, player_two, 0)
+
 
         
-
-
-'''
-player_one.row = input(f'{player_one.name} please select the row (top, middle, bottom).').lower()
-player_one.col = input(f'{player_one.name} please select the column (left, middle, right).').lower()
-player_one.two = input(f'{player_one.name} please select the row (top, middle, bottom).').lower()
-player_one.col = input(f'{player_one.name} please select the column (left, middle, right).').lower()
-'''
 
 main()
 # print(tic_tac_toe_board)
