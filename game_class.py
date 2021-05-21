@@ -1,5 +1,11 @@
 #establishing the game class
 class Game():
+    #user board will be displayed to the players so they can see what choices remain
+    user_board = """0|1|2
+    3|4|5
+    6|7|8
+    """
+
     board = [99] * 9
     row_options = ['top', 'middle', 'bottom']
     col_options = ['left, middle', 'right']
